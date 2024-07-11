@@ -3,8 +3,9 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
     bPrimary: {
         backgroundColor: 'white',
-        borderRadius: 5,
+        borderRadius: 30,
         margin: 10,
+        marginTop: 10
     },
     text:{
         color: 'black',

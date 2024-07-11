@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import {KeyboardAvoidingView, View, Text, Textinput, Alert} from 'react-native';
+import {KeyboardAvoidingView, View, Text, TextInput, Alert} from 'react-native';
 import {MaterialIcons, Entypo} from "@expo/vector-icons";
-//styles
+import { styles } from './style';
 import {ButtonInterface} from "../../components/button"
 import {LoginTypes} from "../../navigations/login.navigation"
 
@@ -15,7 +15,7 @@ export function Login({navigation}: LoginTypes){
         if (data?.email && data.password){
             console.log(data)
         }else{
-            Alert.alert("Preenche todos os campos!!!!");
+            Alert.alert("Preencha todos os campos!!!!");
         }
     }
     function handleRegister(){
@@ -25,8 +25,36 @@ export function Login({navigation}: LoginTypes){
         setData({...data, ...item});
     }
     return(
-        <View style={style.container}>
+        <View style={styles.container}>
             <KeyboardAvoidingView>
+                <View>
+                    {/* logo */}
+                </View>
+                <View style={styles.formRow}>
+                    <MaterialIcons name="email" style={styles.icon}/>
+                    <TextInput placeholderTextColor={"gray"}
+                    style={styles.input}
+                    placeholder='Email'
+                    keyboardType='email-address'
+                    autoCapitalize='none'
+                    onChangeText={(i) => handleChange({email:i})}>             
+                    </TextInput>
+                </View>
+                <View style={styles.formRow}>
+                    <Entypo name="key" style={styles.icon}/>
+                    <TextInput
+                        placeholderTextColor={"gray"}
+                        style={styles.input}
+                        placeholder='Senha'
+                        secureTextEntry={true}
+                        autoCapitalize='none'
+                        onChangeText={(i) => handleChange({password: i})}
+                    />
+                </View>
+                <ButtonInterface title='LOGIN' onPressI={handleSignIn}/>
+                <Text style={styles.text}>Você não possui uma conta?</Text>
+                <ButtonInterface title='REGISTRE-SE AGORA' onPressI={handleRegister}/>
             </KeyboardAvoidingView>
         </View>
-    )
+    );
+}

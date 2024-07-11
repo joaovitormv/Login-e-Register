@@ -1,5 +1,6 @@
 import { createStackNavigator, StackNavigationProp } from "@react-navigation/stack";
 import {Login} from "../SCREENS/login"
+import { Register } from "../SCREENS/register";
 
 type LoginStackParamList = {
     Login: undefined
@@ -13,8 +14,8 @@ export function LoginNavigation(){
     const Stack = createStackNavigator<LoginStackParamList>()
     return(
         <Stack.Navigator id='login' screenOptions={{headerShown: false}}>
-            <Stack.Screen name='Login' component={ScreenLogin}/>
-            //falta o register
+            <Stack.Screen name='Login' component={Login}/>
+            <Stack.Screen name='Register' component={Register}/>
         </Stack.Navigator>
     
     )
