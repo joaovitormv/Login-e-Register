@@ -3,7 +3,7 @@ import {
 } from '../services/data/user'
 import React, {createContext, useState, useCallback, ReactNode, useEffect, Dispatch, SetStateAction} from 'react'
 import {api} from "../services/api"
-import{apiUser} from "../services/data"
+import {apiUser} from "../services/data"
 import {isAfter, parseISO} from 'date-fns'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
@@ -26,7 +26,7 @@ const AuthProvider = ({children} : Iprovider) => {
     const [loading, setLoading] = useState(false)
 
     const signIn = useCallback(async({email, password}: IUser)=>{
-        const [auth, setAuth] = useState<IAuthenticated>({} as IAuthenticated)
+        const response = await apiUser.login({email, password})
         const user = response.data
         api.defaults.headers.common.Authorization = `Bearer ${user.token ? user.token.token: ""}`
         setAuth({...user})
@@ -38,7 +38,7 @@ const AuthProvider = ({children} : Iprovider) => {
     }, [])
 
     const signOut = useCallback(async() => {
-        setAuth({} as IAuthemticated)
+        setAuth({} as IAuthenticated)
         await removeLocalStorage()
         delete api.defaults.headers.common.Authorization
     }, [])
